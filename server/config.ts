@@ -1,10 +1,13 @@
 const port = process.env.PORT
-const host = process.env.HOST
+const host = process.env.HOST ?? 'localhost'
 
-if (!port) throw new Error('PORT is not set in .env')
-if (!host) throw new Error('HOST is not set in .env')
+const portNumber = Number(port)
+
+if (!Number.isInteger(portNumber) || portNumber <= 0) {
+  throw new Error(`PORT must be a positive integer, got "${port}"`)
+}
 
 export const config = {
-  port: Number(port),
-  host: host,
+  port: portNumber,
+  host,
 }
