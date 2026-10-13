@@ -1,12 +1,19 @@
 {
-  "name": "node.js",
-  "version": "1.0.0",
-  "main": "server.ts",
-  "scripts": {
-    "start": "nodemon server.ts",
-    "prepare": "husky"
-  },
+  "name": "express-nodejs-course",
+  "private": true,
   "type": "module",
+  "workspaces": [
+    "server"
+  ],
+  "scripts": {
+    "prepare": "husky",
+    "start": "npm run start -w server",
+    "client": "npm run dev -w client",
+    "server": "npm run dev -w server",
+    "build": "npm run build -w client",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix",
@@ -16,36 +23,22 @@
       "prettier --write"
     ]
   },
-  "nodemonConfig": {
-    "ext": "ts,json",
-    "exec": "tsx",
-    "ignore": [
-      "**/test/**",
-      "**/docs/**",
-      "data/*"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "node.js"
   },
   "author": "Melnyk Anastasiia",
   "license": "ISC",
-  "description": "Node.js learning projects and exercises from Dan.it Education course — homework assignments,in-class exercises, and practice examples covering core Node.js concepts.",
+  "description": "Task 6",
+  "keywords": [],
   "devDependencies": {
     "@eslint/js": "^9.39.5",
-    "@types/node": "^26.6.3",
     "eslint": "^9.39.5",
     "globals": "^17.12.0",
     "husky": "^9.1.7",
-    "nodemon": "^3.1.14",
+    "lint-staged": "^17.6.0",
     "prettier": "3.9.9",
-    "tsx": "^4.23.15",
     "typescript": "~5.7.0",
     "typescript-eslint": "^8.70.1"
-  },
-  "dependencies": {
-    "uuid": "^14.0.2"
-  },
-  "keywords": []
+  }
 }

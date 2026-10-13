@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "server.ts",
+  "scripts": {
+    "start": "nodemon server.ts"
+  },
+  "nodemonConfig": {
+    "ext": "ts,json",
+    "exec": "tsx --env-file=.env",
+    "ignore": [
+      "**/test/**",
+      "**/docs/**",
+      "data/*"
+    ]
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "uuid": "^14.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.3",
+    "nodemon": "^3.1.14",
+    "tsx": "^4.23.15"
+  }
+}

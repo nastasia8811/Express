@@ -1,7 +1,10 @@
 import fs from 'node:fs'
 import path from 'node:path'
+
 import type { Table } from './interfaces/interfaces.ts'
 import type { Schema, Data, Item } from './types/types.ts'
+
+//config({ path: path.resolve(import.meta.dirname, '../.env') })
 
 const dataDirPath: string = path.join(import.meta.dirname, '../data')
 const schemas: Record<string, Schema> = {}
