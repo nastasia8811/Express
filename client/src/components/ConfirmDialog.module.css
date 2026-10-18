@@ -1,0 +1,42 @@
+.dialog {
+  width: min(92vw, 420px);
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--c-cocoa);
+  color: var(--c-ice);
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.6);
+}
+
+.dialog[open] {
+  animation: pop 0.35s var(--ease);
+}
+
+.dialog::backdrop {
+  background: rgb(20 8 4 / 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.title {
+  font-size: 1.6rem;
+}
+
+.message {
+  margin-top: 0.75rem;
+  color: color-mix(in srgb, var(--c-ice) 75%, transparent);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+}

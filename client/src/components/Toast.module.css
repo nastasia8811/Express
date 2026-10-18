@@ -1,0 +1,26 @@
+.stack {
+  position: fixed;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  z-index: 50;
+  display: grid;
+  gap: 0.6rem;
+  justify-items: end;
+}
+
+.toast {
+  padding: 0.85rem 1.25rem;
+  border-radius: 14px;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 16px 40px -12px rgb(0 0 0 / 0.5);
+}
+
+.success {
+  background: var(--c-cocoa);
+  border: 1px solid var(--c-taupe);
+}
+
+.error {
+  background: var(--c-pink);
+}

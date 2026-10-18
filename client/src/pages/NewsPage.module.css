@@ -1,0 +1,61 @@
+.section {
+  min-height: calc(100svh - var(--header-height));
+  padding: 2.5rem 0 5rem;
+}
+
+.progress {
+  position: fixed;
+  top: var(--header-height);
+  left: 0;
+  right: 0;
+  z-index: 15;
+  height: 3px;
+  background: var(--c-pink);
+  transform-origin: 0 50%;
+}
+
+.inner {
+  display: grid;
+  gap: 2.5rem;
+  max-width: 820px;
+}
+
+.back {
+  justify-self: start;
+}
+
+.article {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.date {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-rose);
+}
+
+.title {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  width: fit-content;
+}
+
+.text {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.skeleton {
+  display: grid;
+  gap: 1rem;
+}

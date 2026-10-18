@@ -1,0 +1,19 @@
+.section {
+  min-height: calc(100svh - var(--header-height));
+  padding: 3rem 0 5rem;
+}
+
+.inner {
+  display: grid;
+  gap: 2.5rem;
+  max-width: 760px;
+}
+
+.title {
+  font-size: clamp(2.2rem, 6vw, 4rem);
+}
+
+.skeleton {
+  display: grid;
+  gap: 1.5rem;
+}

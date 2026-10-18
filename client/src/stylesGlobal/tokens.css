@@ -1,0 +1,26 @@
+:root {
+  --c-pink: #d3045d;
+  --c-rose: #e484ac;
+  --c-wine: #740c08;
+  --c-ice: #b3ced6;
+  --c-taupe: #927b67;
+  --c-cocoa: #523f2b;
+
+  /* змінюються під час скролу в useSectionTones */
+  --bg: var(--c-cocoa);
+  --fg: var(--c-ice);
+
+  --surface: color-mix(in srgb, var(--fg) 8%, transparent);
+  --surface-strong: color-mix(in srgb, var(--fg) 14%, transparent);
+  --line: color-mix(in srgb, var(--fg) 22%, transparent);
+  --muted: color-mix(in srgb, var(--fg) 68%, transparent);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius: 22px;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --max-width: 1180px;
+  --header-height: 72px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}

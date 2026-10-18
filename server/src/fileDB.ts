@@ -1,14 +1,38 @@
 import fs from 'node:fs'
 import path from 'node:path'
-
 import type { Table } from './interfaces/interfaces.ts'
-import type { Schema, Data, Item } from './types/types.ts'
+import type { PlainObject, Item } from './types/types.ts'
+
+const dataDirPath: string = path.join(import.meta.dirname, '../data')
+const schemas: Record<string, PlainObject> = {}
+const filePath = (name: string): string => path.join(dataDirPath, `${name}.json`)
 
 //config({ path: path.resolve(import.meta.dirname, '../.env') })
 
-const dataDirPath: string = path.join(import.meta.dirname, '../data')
-const schemas: Record<string, Schema> = {}
-const filePath = (name: string): string => path.join(dataDirPath, `${name}.json`)
+const matchesType = (value: unknown, type: unknown): boolean => {
+  if (type === String) return typeof value === 'string'
+  if (type === Number) return typeof value === 'number'
+  if (type === Date)
+    return value instanceof Date || (typeof value === 'string' && !Number.isNaN(Date.parse(value)))
+  return true
+}
+
+const objectBySchema = (data: PlainObject, schema: PlainObject): PlainObject => {
+  const result: PlainObject = {}
+
+  for (const key in data) {
+    if (
+      key in schema &&
+      key !== 'id' &&
+      key !== 'createDate' &&
+      matchesType(data[key], schema[key])
+    ) {
+      result[key] = data[key]
+    }
+  }
+
+  return result
+}
 
 // Singleton Pattern - у класу лише один екземпляр на весь проєкт, оскільки FileDB виконує роль бази даних,
 // нам треба мати лише один екземпляр.
@@ -25,7 +49,7 @@ class FileDB {
     return FileDB.instance
   }
 
-  registerSchema(name: string, schema: Schema): void {
+  registerSchema(name: string, schema: PlainObject): void {
     schemas[name] = schema
 
     const dataFilePath = filePath(name)
@@ -45,57 +69,28 @@ class FileDB {
     const schema = schemas[name]
     if (!schema) throw new Error(`Schema "${name}" is not registered`)
 
-    const matchesType = (value: unknown, type: unknown): boolean => {
-      if (type === String) return typeof value === 'string'
-      if (type === Number) return typeof value === 'number'
-      if (type === Date)
-        return (
-          value instanceof Date || (typeof value === 'string' && !Number.isNaN(Date.parse(value)))
-        )
-      return true
-    }
-
-    const objectBySchema = (data: Data): Data => {
-      const result: Data = {}
-
-      for (const key in data) {
-        if (
-          key in schema &&
-          key !== 'id' &&
-          key !== 'createDate' &&
-          matchesType(data[key], schema[key])
-        ) {
-          result[key] = data[key]
-        }
-      }
-
-      return result
-    }
-
     const readAll = (): Item[] => JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'))
     const saveAll = (items: Item[]): void =>
       fs.writeFileSync(dataFilePath, JSON.stringify(items, null, 2))
 
-    const getAll = (): Item[] => readAll()
-
     const getById = (id: number): Item | undefined => readAll().find(item => item.id === id)
 
-    const create = (data: Data): Item => {
+    const create = (data: PlainObject): Item => {
       const items = readAll()
       const newItem: Item = {
         id: items.length ? Math.max(...items.map(i => i.id)) + 1 : 1,
-        ...objectBySchema(data),
+        ...objectBySchema(data, schema),
         createDate: new Date(),
       }
       saveAll([...items, newItem])
       return newItem
     }
 
-    const update = (id: number, data: Data): Item | null => {
+    const update = (id: number, data: PlainObject): Item | null => {
       const items = readAll()
       const index = items.findIndex(item => item.id === id)
       if (index === -1) return null
-      const updated = { ...items[index], ...objectBySchema(data) } as Item
+      const updated = { ...items[index], ...objectBySchema(data, schema) } as Item
       items[index] = updated
       saveAll(items)
       return updated
@@ -108,7 +103,7 @@ class FileDB {
       return id
     }
 
-    return { getAll, getById, create, update, delete: remove } as Table<T>
+    return { getAll: readAll, getById, create, update, delete: remove } as Table<T>
   }
 }
 

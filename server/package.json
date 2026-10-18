@@ -1,11 +1,16 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
+  "description": "",
   "main": "server.ts",
+  "keywords": [],
+  "author": "Anastasiia",
+  "license": "ISC",
+  "type": "module",
+  "private": "true",
   "scripts": {
-    "start": "nodemon server.ts"
+    "start": "nodemon server.ts",
+    "typecheck": "tsc --noEmit"
   },
   "nodemonConfig": {
     "ext": "ts,json",
@@ -16,14 +21,15 @@
       "data/*"
     ]
   },
-  "dependencies": {
-    "express": "^5.3.0",
-    "uuid": "^14.0.2"
-  },
   "devDependencies": {
     "@types/express": "^5.0.6",
-    "@types/node": "^26.6.3",
+    "@types/node": "^26.6.5",
     "nodemon": "^3.1.14",
-    "tsx": "^4.23.15"
+    "tsx": "^4.23.15",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "uuid": "^14.0.3"
   }
 }

@@ -1,0 +1,29 @@
+.section {
+  display: grid;
+  align-items: center;
+  min-height: calc(100svh - var(--header-height));
+  padding: 3rem 0;
+}
+
+.inner {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.code {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 22vw, 14rem);
+  font-weight: 800;
+  line-height: 0.9;
+  color: var(--c-pink);
+}
+
+.title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.text {
+  margin-bottom: 1rem;
+  color: var(--muted);
+}
