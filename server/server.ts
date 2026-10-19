@@ -9,10 +9,8 @@ import newspostsDeleteRouter from './src/routes/newspostsDelete.ts'
 import { ErrorHandler } from './src/error/errorHandler.ts'
 
 const app: Express = express()
-
+const clientDistPath = path.join(import.meta.dirname, '../client/dist')
 app.use(express.json())
-
-app.use(express.static(path.join(import.meta.dirname, '../client/dist')))
 app.get('/health', (_req: Request, res: Response) => res.json({ ok: true }))
 
 app.use('/api/newsposts', newspostsRouter)
@@ -21,8 +19,14 @@ app.use('/api/newsposts', newspostsPostRouter)
 app.use('/api/newsposts', newspostsUpdateRouter)
 app.use('/api/newsposts', newspostsDeleteRouter)
 
-app.get('/{*splat}', (_req, res) => {
-  res.sendFile(path.resolve('../client/dist/index.html'))
+app.get('/', (_req: Request, res: Response) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'))
+})
+
+app.use(express.static(clientDistPath))
+
+app.get('/{*splat}', (_req: Request, res: Response) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'))
 })
 
 app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {

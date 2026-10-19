@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Link, NavLink } from 'react-router'
+import { NavLink } from 'react-router'
 import { ButtonLink } from './Button'
 import { LangSwitcher } from './LangSwitcher'
 import styles from './Header.module.css'
@@ -10,16 +10,10 @@ export function Header() {
   return (
     <header className={styles.header}>
       <div className={`container ${styles.inner}`}>
-        <Link to='/' className={styles.brand}>
+        <NavLink to='/' className={styles.brand} aria-label='Main'>
           <span className={styles.dot} aria-hidden='true' />
           {t('brand')}
-        </Link>
-
-        <nav className={styles.nav} aria-label='Main'>
-          <NavLink to='/' end className={styles.link}>
-            {t('nav.home')}
-          </NavLink>
-        </nav>
+        </NavLink>
 
         <div className={styles.actions}>
           <LangSwitcher />

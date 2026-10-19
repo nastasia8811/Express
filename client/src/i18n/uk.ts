@@ -1,7 +1,6 @@
 export const uk = {
-  brand: 'Вісник',
+  brand: 'Новини',
   nav: {
-    home: 'Головна',
     add: 'Додати новину',
   },
   hero: {

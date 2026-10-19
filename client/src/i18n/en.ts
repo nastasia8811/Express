@@ -1,9 +1,8 @@
 import type { Translation } from './uk'
 
 export const en: Translation = {
-  brand: 'Herald',
+  brand: 'News',
   nav: {
-    home: 'Home',
     add: 'Add news',
   },
   hero: {
