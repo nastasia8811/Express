@@ -20,6 +20,8 @@ export const en: Translation = {
     count_other: '{{count}} stories',
     emptyTitle: 'Nothing here yet',
     emptyText: 'Be the first to publish a story.',
+    noMoreTitle: 'No more news',
+    noMoreText: 'You have read all the news.',
   },
   about: {
     title: 'Why Herald',
@@ -66,6 +68,11 @@ export const en: Translation = {
     titleMax: 'Title is too long (up to 120 characters)',
     textMin: 'Text must be at least 10 characters',
     textMax: 'Text is too long (up to 5000 characters)',
+  },
+  pagination: {
+    next: 'Next',
+    back: 'Back',
+    pageNum: 'Page {{page}}',
   },
   toast: {
     created: 'Story published',

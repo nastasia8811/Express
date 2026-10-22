@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { newsApi } from './api/newsposts'
 import type { NewsInput, NewsPost } from './api/types'
 
@@ -7,10 +7,11 @@ export const newsKeys = {
   detail: (id: string | number) => ['news', 'detail', id] as const,
 }
 
-export function useNewsList() {
+export function useNewsList(page: number, size: number) {
   return useQuery({
-    queryKey: newsKeys.list,
-    queryFn: ({ signal }) => newsApi.list(signal),
+    queryKey: [...newsKeys.list, page, size],
+    queryFn: ({ signal }) => newsApi.list(page, size, signal),
+    placeholderData: keepPreviousData,
   })
 }
 

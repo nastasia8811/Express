@@ -1,13 +1,16 @@
-import express, { type Request, type Response, type NextFunction } from 'express'
-import { ErrorHandler } from './../error/errorHandler.ts'
-import { newspostRepository } from '../repositories/newspost.repository.ts'
+import express, { type Response, type NextFunction } from 'express'
+import { ErrorHandler } from '../error/errorHandler.ts'
+import type { GetNewspostsRequest } from '../types/types.ts'
+import { NewspostsService } from '../services/newsposts.service.ts'
 
 const app = express()
 app.use(express.json())
 
-app.get('/', async (_req: Request, res: Response, next: NextFunction) => {
+app.get('/', async (req: GetNewspostsRequest, res: Response, next: NextFunction) => {
   try {
-    const newsposts = await newspostRepository.getAll()
+    const page = Number(req.query.page) || 0
+    const size = Number(req.query.size) || 10
+    const newsposts = await NewspostsService.getAll({ page, size })
     return res.json(newsposts)
   } catch (error) {
     console.error(error)

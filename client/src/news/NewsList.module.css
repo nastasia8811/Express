@@ -4,6 +4,17 @@
   gap: 1.5rem;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.page {
+  margin-top: 0.5rem;
+}
+
 .grid > * {
   display: grid;
 }

@@ -7,10 +7,14 @@ import { Button } from '../components/Button'
 import { useNewsList } from './../hooks'
 import { NewsCard } from './NewsCard'
 import styles from './NewsList.module.css'
+import { useState } from 'react'
+
+const SIZE = 6
 
 export function NewsList() {
   const { t } = useTranslation()
-  const { data, isPending, isError, refetch, isRefetching } = useNewsList()
+  const [page, setPage] = useState(0)
+  const { data, isPending, isError, refetch, isRefetching } = useNewsList(page, SIZE)
 
   if (isPending) {
     return (
@@ -38,7 +42,7 @@ export function NewsList() {
     )
   }
 
-  if (data.length === 0) {
+  if (data.length === 0 && page === 0) {
     return (
       <StateMessage title={t('list.emptyTitle')} text={t('list.emptyText')}>
         <ButtonLink to='/news/new' viewTransition>
@@ -48,13 +52,34 @@ export function NewsList() {
     )
   }
 
+  if (data.length === 0 && page > 0) {
+    return (
+      <StateMessage title={t('list.noMoreTitle')} text={t('list.noMoreText')}>
+        <Button onClick={() => setPage(page - 1)}>{t('pagination.back')}</Button>
+      </StateMessage>
+    )
+  }
+
   return (
-    <div className={styles.grid}>
-      {data.map((post, index) => (
-        <Reveal key={post.id} delay={(index % 3) * 0.08}>
-          <NewsCard post={post} />
-        </Reveal>
-      ))}
-    </div>
+    <>
+      <div className={styles.grid}>
+        {data.map((post, index) => (
+          <Reveal key={post.id} delay={(index % 3) * 0.08}>
+            <NewsCard post={post} />
+          </Reveal>
+        ))}
+      </div>
+      <div className={styles.pagination}>
+        <Button onClick={() => setPage(page - 1)} disabled={page === 0}>
+          {t('pagination.back')}
+        </Button>
+        <span className={styles.page}>
+          <span className={styles.page}>{t('pagination.pageNum', { page: page + 1 })}</span>
+        </span>
+        <Button onClick={() => setPage(page + 1)} disabled={data.length < SIZE}>
+          {t('pagination.next')}
+        </Button>
+      </div>
+    </>
   )
 }

@@ -4,8 +4,8 @@ import type { NewsInput, NewsPost } from './types'
 // signal дає змогу скасувати запит.React Query сам передає його,
 // коли користувач іде зі сторінки до того, як дані прийшли.
 export const newsApi = {
-  list(signal?: AbortSignal) {
-    return request<NewsPost[]>('/newsposts', { signal })
+  list(page: number, size: number, signal?: AbortSignal) {
+    return request<NewsPost[]>(`/newsposts?page=${page}&size=${size}`, { signal })
   },
 
   get(id: string | number, signal?: AbortSignal) {

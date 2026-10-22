@@ -18,6 +18,8 @@ export const uk = {
     count_other: '{{count}} новини',
     emptyTitle: 'Тут поки порожньо',
     emptyText: 'Станьте першими, хто опублікує новину.',
+    noMoreTitle: 'Новин більше немає',
+    noMoreText: 'Ви переглянули всі новини.',
   },
   about: {
     title: 'Чому саме Вісник',
@@ -67,6 +69,11 @@ export const uk = {
     titleMax: 'Заголовок задовгий (до 120 символів)',
     textMin: 'Текст має містити щонайменше 10 символів',
     textMax: 'Текст задовгий (до 5000 символів)',
+  },
+  pagination: {
+    next: 'Далі',
+    back: 'Назад',
+    pageNum: 'Сторінка {{page}}',
   },
   toast: {
     created: 'Новину опубліковано',

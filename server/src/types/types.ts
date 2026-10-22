@@ -16,6 +16,17 @@ type UpdateNewspostRequest = Request<{ id: string }, object, UpdateNewspostBody>
 
 type DeleteNewspostRequest = Request<{ id: string }>
 
+type PaginationParams = {
+  page: number
+  size: number
+}
+type PaginationQuery = {
+  page?: string
+  size?: string
+}
+
+type GetNewspostsRequest = Request<object, object, object, PaginationQuery>
+
 export type {
   PlainObject,
   Item,
@@ -25,4 +36,6 @@ export type {
   UpdateNewspostBody,
   UpdateNewspostRequest,
   DeleteNewspostRequest,
+  PaginationParams,
+  GetNewspostsRequest,
 }
