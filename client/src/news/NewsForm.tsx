@@ -15,7 +15,7 @@ interface NewsFormProps {
 }
 
 export function NewsForm({
-  defaultValues = { title: '', text: '' },
+  defaultValues = { title: '', text: '', genre: 'Other', isPrivate: false },
   submitLabel,
   onSubmit,
 }: NewsFormProps) {

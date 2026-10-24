@@ -7,3 +7,17 @@ export class ErrorHandler extends Error {
     this.name = 'ErrorHandler'
   }
 }
+
+export class ValidationError extends ErrorHandler {
+  constructor(message: string) {
+    super(message, 400)
+    this.name = 'ValidationError'
+  }
+}
+
+export class NewspostsServiceError extends ErrorHandler {
+  constructor(message: string) {
+    super(message, 500)
+    this.name = 'NewspostsServiceError'
+  }
+}

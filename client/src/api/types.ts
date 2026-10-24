@@ -3,6 +3,8 @@ export interface NewsPost {
   title: string
   text: string
   createDate?: string
+  genre: string
+  isPrivate: boolean
 }
 
 export interface NewsInput {
