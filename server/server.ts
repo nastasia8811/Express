@@ -10,6 +10,9 @@ import { ErrorHandler } from './src/error/errorHandler.ts'
 import winston from 'winston'
 import { ValidationError } from './src/error/errorHandler.ts'
 
+import passport from 'passport'
+import authRoutes from './src/routes/authRoutes.ts'
+
 export const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
@@ -28,6 +31,8 @@ const app: Express = express()
 const clientDistPath = path.join(import.meta.dirname, '../client/dist')
 
 app.use(express.json())
+app.use(passport.initialize())
+app.use(authRoutes)
 
 app.use((req: Request, _res: Response, next: NextFunction) => {
   const hasBody = req.body && Object.keys(req.body).length > 0

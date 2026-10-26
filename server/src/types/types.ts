@@ -26,6 +26,17 @@ type PaginationQuery = {
 
 type GetNewspostsRequest = Request<object, object, object, PaginationQuery>
 
+type RegisterBody = {
+  email: string
+  password: string
+  confirmPassword: string
+}
+
+type AuthenBody = {
+  email: string
+  password: string
+}
+
 export type {
   PlainObject,
   Item,
@@ -37,4 +48,6 @@ export type {
   DeleteNewspostRequest,
   PaginationParams,
   GetNewspostsRequest,
+  RegisterBody,
+  AuthenBody,
 }
