@@ -1,6 +1,5 @@
-import type { NewpostSchema } from '../schemas/newpostSchema.ts'
 import type { Request } from 'express'
-
+import type { NewspostSchema } from '../interfaces/interfaces.ts'
 type PlainObject = Record<string, unknown>
 
 type Item = PlainObject & { id: number }
@@ -8,10 +7,10 @@ type Item = PlainObject & { id: number }
 
 type NewspostByIdRequest = Request<{ id: string }>
 
-type CreateNewspostBody = Omit<NewpostSchema, 'id' | 'createDate'>
+type CreateNewspostBody = Omit<NewspostSchema, 'id' | 'createDate'>
 type CreateNewspostRequest = Request<object, object, CreateNewspostBody>
 
-type UpdateNewspostBody = Partial<Omit<NewpostSchema, 'id' | 'createDate'>>
+type UpdateNewspostBody = Partial<Omit<NewspostSchema, 'id' | 'createDate'>>
 type UpdateNewspostRequest = Request<{ id: string }, object, UpdateNewspostBody>
 
 type DeleteNewspostRequest = Request<{ id: string }>

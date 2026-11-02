@@ -91,7 +91,7 @@ export function EditNewsPage() {
       {post && (
         <NewsForm
           key={post.id}
-          defaultValues={{ title: post.title, text: post.text }}
+          defaultValues={{ title: post.title, text: post.text, genre: 'Other', isPrivate: false }}
           submitLabel={t('form.save')}
           onSubmit={handleSubmit}
         />

@@ -1,6 +1,6 @@
 import { fileDB } from '../fileDB.ts'
 import type { CreateNewspostBody, PaginationParams, UpdateNewspostBody } from '../types/types.ts'
-import { newspostSchema } from '../schemas/newpostSchema.ts'
+import { newspostSchema } from '../schemas/newspostSchema.ts'
 
 fileDB.registerSchema('newspost', newspostSchema)
 const table = fileDB.getTable('newspost')
