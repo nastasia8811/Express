@@ -1,3 +1,4 @@
+import { writeFile } from 'node:fs/promises'
 import fs from 'node:fs'
 import path from 'node:path'
 import type { Table } from './interfaces/interfaces.ts'
@@ -57,7 +58,9 @@ class FileDB {
     fs.mkdirSync(dataDirPath, { recursive: true })
 
     if (!fs.existsSync(dataFilePath)) {
-      fs.writeFileSync(dataFilePath, JSON.stringify([]))
+      fs.writeFile(dataFilePath, JSON.stringify([]), err => {
+        if (err) console.error(err)
+      })
     }
   }
 
@@ -70,36 +73,37 @@ class FileDB {
     if (!schema) throw new Error(`Schema "${name}" is not registered`)
 
     const readAll = (): Item[] => JSON.parse(fs.readFileSync(dataFilePath, 'utf-8'))
-    const saveAll = (items: Item[]): void =>
-      fs.writeFileSync(dataFilePath, JSON.stringify(items, null, 2))
+    const saveAll = async (items: Item[]): Promise<void> => {
+      await writeFile(dataFilePath, JSON.stringify(items, null, 2))
+    }
 
     const getById = (id: number): Item | undefined => readAll().find(item => item.id === id)
 
-    const create = (data: PlainObject): Item => {
+    const create = async (data: PlainObject): Promise<Item> => {
       const items = readAll()
       const newItem: Item = {
         id: items.length ? Math.max(...items.map(i => i.id)) + 1 : 1,
         ...objectBySchema(data, schema),
         createDate: new Date(),
       }
-      saveAll([...items, newItem])
+      await saveAll([...items, newItem])
       return newItem
     }
 
-    const update = (id: number, data: PlainObject): Item | null => {
+    const update = async (id: number, data: PlainObject): Promise<Item | null> => {
       const items = readAll()
       const index = items.findIndex(item => item.id === id)
       if (index === -1) return null
       const updated = { ...items[index], ...objectBySchema(data, schema) } as Item
       items[index] = updated
-      saveAll(items)
+      await saveAll(items)
       return updated
     }
 
-    const remove = (id: number): number | null => {
+    const remove = async (id: number): Promise<number | null> => {
       const items = readAll()
       if (!items.some(item => item.id === id)) return null
-      saveAll(items.filter(item => item.id !== id))
+      await saveAll(items.filter(item => item.id !== id))
       return id
     }
 

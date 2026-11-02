@@ -2,10 +2,6 @@ import path from 'node:path'
 import { config } from './config.ts'
 import express, { type Express, type Request, type Response, type NextFunction } from 'express'
 import newspostsRouter from './src/routes/newsposts.ts'
-import newspostsIdRouter from './src/routes/newspostsId.ts'
-import newspostsPostRouter from './src/routes/newspostsPost.ts'
-import newspostsUpdateRouter from './src/routes/newspostsUpdate.ts'
-import newspostsDeleteRouter from './src/routes/newspostsDelete.ts'
 import { ErrorHandler } from './src/error/errorHandler.ts'
 import winston from 'winston'
 import { ValidationError } from './src/error/errorHandler.ts'
@@ -44,10 +40,6 @@ app.use((req: Request, _res: Response, next: NextFunction) => {
 app.get('/health', (_req: Request, res: Response) => res.json({ ok: true }))
 
 app.use('/api/newsposts', newspostsRouter)
-app.use('/api/newsposts', newspostsIdRouter)
-app.use('/api/newsposts', newspostsPostRouter)
-app.use('/api/newsposts', newspostsUpdateRouter)
-app.use('/api/newsposts', newspostsDeleteRouter)
 
 app.get('/', (_req: Request, res: Response) => {
   res.sendFile(path.join(clientDistPath, 'index.html'))

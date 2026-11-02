@@ -20,9 +20,9 @@ interface UserSchema {
 interface Table<T> {
   getAll(): T[]
   getById(id: number): T | undefined
-  create(data: Omit<T, 'id' | 'createDate'>): T
-  update(id: number, data: Partial<Omit<T, 'id' | 'createDate'>>): T | null
-  delete(id: number): number | null
+  create(data: Omit<T, 'id' | 'createDate'>): Promise<T>
+  update(id: number, data: Partial<Omit<T, 'id' | 'createDate'>>): Promise<T | null>
+  delete(id: number): Promise<number | null>
 }
 
 export type { Table, NewspostSchema, UserSchema }
