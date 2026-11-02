@@ -11,7 +11,7 @@ const router = Router()
 const validateRegister = ajv.compile<RegisterBody>(validateRegistration)
 const validateLogin = ajv.compile<AuthenBody>(validateAuthentification)
 
-router.post('/auth/register', (req, res) => {
+router.post('/auth/register', async (req, res) => {
   if (!validateRegister(req.body)) {
     res.status(400).json({ errors: validateRegister.errors })
     return
@@ -29,7 +29,7 @@ router.post('/auth/register', (req, res) => {
     return
   }
 
-  const user = createUser(email, hashPassword(password))
+  const user = await createUser(email, hashPassword(password))
   res.status(201).json({ token: createToken(user) })
 })
 

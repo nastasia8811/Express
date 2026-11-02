@@ -1,13 +1,13 @@
 import path from 'node:path'
 import { config } from './config.ts'
 import express, { type Express, type Request, type Response, type NextFunction } from 'express'
-import newspostsRouter from './src/routes/newsposts.ts'
+import newspostsRouter from './src/routes/newsposts.router.ts'
 import { ErrorHandler } from './src/error/errorHandler.ts'
 import winston from 'winston'
 import { ValidationError } from './src/error/errorHandler.ts'
 
 import passport from 'passport'
-import authRoutes from './src/routes/authRoutes.ts'
+import authRoutes from './src/routes/auth.router.ts'
 
 export const logger = winston.createLogger({
   level: 'info',
