@@ -67,8 +67,64 @@
   },
   {
     "id": 12,
-    "title": "Новина 10",
+    "title": "Новина 254",
     "text": "Новина 10 Новина 10 Новина 10 Новина 10",
     "createDate": "2026-10-22T19:10:40.706Z"
+  },
+  {
+    "id": 14,
+    "title": "Test",
+    "text": "Middleware functions are functions that have access to the request object (req), the response object (res), and the next function in the application’s request-response cycle.",
+    "genre": "Sport",
+    "isPrivate": false,
+    "createDate": "2026-10-24T14:01:28.532Z"
+  },
+  {
+    "id": 15,
+    "title": "Test",
+    "text": "Hello",
+    "genre": "Sport",
+    "isPrivate": false,
+    "createDate": "2026-10-24T14:06:21.021Z"
+  },
+  {
+    "id": 16,
+    "title": "fgfgfgff",
+    "text": "fgfgfgfgfffgfgffgfg",
+    "genre": "Other",
+    "isPrivate": false,
+    "createDate": "2026-10-24T14:26:03.128Z"
+  },
+  {
+    "id": 17,
+    "title": "Новина 254hj",
+    "text": "ryryrururiririiriririr",
+    "genre": "Other",
+    "isPrivate": false,
+    "createDate": "2026-10-24T14:27:17.434Z"
+  },
+  {
+    "id": 18,
+    "title": "Test",
+    "text": "Hello",
+    "genre": "Sport",
+    "isPrivate": false,
+    "createDate": "2026-10-28T12:34:54.296Z"
+  },
+  {
+    "id": 19,
+    "title": "New post",
+    "text": "Post by new scenario",
+    "genre": "Sport",
+    "isPrivate": false,
+    "createDate": "2026-10-28T21:56:29.086Z"
+  },
+  {
+    "id": 20,
+    "title": "New post",
+    "text": "Post by new scenario",
+    "genre": "Sport",
+    "isPrivate": false,
+    "createDate": "2026-10-28T22:02:12.007Z"
   }
 ]
